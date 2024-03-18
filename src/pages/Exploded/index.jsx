@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Logo, SuccessImg, Title } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 import ButtonComponent from "../../components/Buttons";
 import logoImg from "../../assets/logoLightRed.png";
 import successImg from "../../assets/bomba_explodiu.png"
+import { Vibration } from "react-native";
 
 export default function Exploded(){
     const navigation = useNavigation();
@@ -12,6 +13,10 @@ export default function Exploded(){
     function handleNavToStart(){
         navigation.navigate("Start");
     }
+
+    useEffect(()=>{
+        Vibration.vibrate(5000);
+    }, []);
     
     return(
         <Container>
