@@ -10,28 +10,57 @@ export default function PasswordInput({pin, setPin, started}){
     return(
         <Container>
             <InputContainer>
+            {!started ? (
+                <Input editable={false} selectTextOnFocus={false} abled={started} />
+            ):(
                 <Input 
                     keyboardType={"number-pad"} 
                     maxLength={1} 
                     ref={input1} 
-                    onChangeText={(value)=>{value&&input2.current.focus()}}
+                    value={pin[0]}
+                    onChangeText={(value)=>{
+                        value&&input2.current.focus();
+                        setPin([value, pin[1], pin[2]]);
+                    }}
                 />
+            )}
+                
             </InputContainer>
+
             <InputContainer>
+            {!started ? (
+                <Input editable={false} selectTextOnFocus={false} abled={started} />
+            ):(
                 <Input 
                     keyboardType={"number-pad"} 
                     maxLength={1} 
+                    value={pin[1]}
                     ref={input2} 
-                    onChangeText={(value)=>{value&&input3.current.focus()}}    
+                    onChangeText={(value)=>{
+                        value&&input3.current.focus();
+                        setPin([pin[0], value, pin[2]]);
+                    }}    
                 />
+
+            )}
             </InputContainer>
+
             <InputContainer>
+            {!started ? (
+                <Input editable={false} selectTextOnFocus={false} abled={started} />
+            ):(
                 <Input 
                     keyboardType={"number-pad"} 
                     maxLength={1} 
+                    value={pin[2]}
                     ref={input3} 
-                    onChangeText={(value)=>Keyboard.dismiss()}
+                    onChangeText={(value)=>{
+                        Keyboard.dismiss();
+                        setPin([pin[0], pin[1], value]);
+                    }}
                 />
+            )}
+
             </InputContainer>
 
             
